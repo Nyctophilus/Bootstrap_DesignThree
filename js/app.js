@@ -19,3 +19,26 @@ taps.forEach((tap) => {
     });
   };
 });
+
+// Statistics numbers
+const statsNums = document.querySelectorAll(".stats span"),
+  statsDiv = document.querySelector(".stats");
+let started = false;
+
+window.onscroll = () => {
+  if (window.scrollY >= statsDiv.offsetTop - 500) {
+    statsNums.forEach((n) => {
+      if (!started) {
+        let goal = n.dataset.num;
+        const counter = setInterval(() => {
+          n.textContent++;
+
+          if (n.textContent === goal)
+            clearInterval(counter);
+        }, 1 / goal);
+      }
+    });
+
+    started = true;
+  }
+};
